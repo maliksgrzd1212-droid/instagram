@@ -1,0 +1,884 @@
+/* ==========================================================================
+   INSTAGRAM CLONE - DARK THEME STYLE SHEET
+   ========================================================================== */
+
+/* 1. Core Variables & Design System */
+:root {
+    --bg-color: #000000;
+    --card-bg: #000000;
+    --modal-bg: #121212;
+    --modal-border: #262626;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #a8a8a8;
+    --text-placeholder: #737373;
+    
+    --border-color: #262626;
+    --border-hover: #363636;
+    --focus-outline: #0095f6;
+    
+    --btn-disabled: #1c3d6a;
+    --btn-active: #0095f6;
+    --btn-active-hover: #1877f2;
+    --btn-outline-border: #363636;
+    --btn-outline-blue: #0095f6;
+    
+    --close-friends-green: #00e054;
+    
+    --transition-fast: 0.15s ease-out;
+    --transition-normal: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-slow: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 2. Global Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+button {
+    font-family: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
+
+/* 3. Page Layout Container */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 4. Left Panel - Headline & Graphic Stack */
+.left-panel {
+    flex: 1.1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 60px;
+    user-select: none;
+}
+
+.instagram-brand {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.insta-logo-container {
+    width: 72px;
+    height: 72px;
+    animation: floatLogo 6s ease-in-out infinite;
+}
+
+.insta-logo-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.headline-text {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+}
+
+.gradient-close-friends {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    position: relative;
+}
+
+/* Three Stacked Rotating Phone Mockups */
+.phone-stack-container {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-frame {
+    position: absolute;
+    width: 220px;
+    height: 390px;
+    border-radius: 32px;
+    border: 6px solid #262626;
+    background: #000;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transition: transform var(--transition-slow), z-index var(--transition-slow), filter var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+.friend-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* Positioning and stack order */
+.phone-left {
+    transform: translateX(-110px) translateY(15px) rotate(-11deg) scale(0.9);
+    z-index: 1;
+    filter: brightness(0.6) blur(0.5px);
+}
+
+.phone-right {
+    transform: translateX(110px) translateY(10px) rotate(9deg) scale(0.9);
+    z-index: 2;
+    filter: brightness(0.6) blur(0.5px);
+}
+
+.phone-center {
+    transform: translateX(0) translateY(-5px) rotate(-2deg) scale(1.05);
+    z-index: 3;
+    border-color: #363636;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    filter: brightness(1);
+}
+
+/* Hover Interactive Effects */
+.phone-stack-container:hover .phone-left {
+    transform: translateX(-130px) translateY(25px) rotate(-15deg) scale(0.88);
+    filter: brightness(0.5);
+}
+
+.phone-stack-container:hover .phone-right {
+    transform: translateX(130px) translateY(18px) rotate(12deg) scale(0.88);
+    filter: brightness(0.5);
+}
+
+.phone-stack-container:hover .phone-center {
+    transform: translateX(0) translateY(-15px) rotate(0deg) scale(1.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85);
+}
+
+/* Floating UI Decorations inside Frames */
+.reaction-badge {
+    position: absolute;
+    bottom: 24px;
+    left: -12px;
+    background: #000;
+    border: 2px solid #262626;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    animation: pulseBadge 3s infinite ease-in-out;
+}
+
+.close-friends-badge {
+    position: absolute;
+    top: 16px;
+    right: 12px;
+    background: var(--close-friends-green);
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chevron-down-mini {
+    margin-top: 1px;
+}
+
+.profile-overlap {
+    position: absolute;
+    bottom: 16px;
+    right: -10px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 3px solid #262626;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.overlap-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Center Phone Stickers & Story Bar */
+.emoji-sticker-group {
+    position: absolute;
+    top: 16px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 6px 12px;
+    border-radius: 30px;
+    display: flex;
+    gap: 8px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    animation: floatSticker 4s ease-in-out infinite;
+}
+
+.story-bottom-bar {
+    position: absolute;
+    bottom: 16px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.white-pill-input {
+    flex: 1;
+    height: 38px;
+    border-radius: 19px;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    background: transparent;
+}
+
+.story-heart-icon {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.story-heart-icon:hover {
+    transform: scale(1.15);
+}
+
+/* 5. Right Panel - Form Container */
+.right-panel {
+    flex: 0.9;
+    display: flex;
+    justify-content: center;
+}
+
+/* Separator Line (Desktop only) */
+.main-content::before {
+    content: '';
+    width: 1px;
+    align-self: stretch;
+    background-color: var(--border-color);
+    margin: 40px 60px 40px 0;
+    order: 1;
+}
+
+.right-panel {
+    order: 2;
+}
+
+.left-panel {
+    order: 0;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Header styling */
+.login-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.back-btn {
+    color: var(--text-primary);
+    opacity: 0.85;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}
+
+.back-btn:hover {
+    opacity: 1;
+    transform: translateX(-2px);
+}
+
+.login-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+
+/* Form Fields */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Floating Input Group */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    height: 58px;
+    background-color: #000;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-wrapper:hover {
+    border-color: var(--border-hover);
+}
+
+.input-wrapper.focus {
+    border-color: var(--focus-outline);
+    box-shadow: 0 0 0 1px var(--focus-outline);
+}
+
+.input-wrapper input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    padding: 22px 14px 6px 14px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.floating-label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 14px;
+    pointer-events: none;
+    transition: transform var(--transition-fast), font-size var(--transition-fast), color var(--transition-fast);
+    transform-origin: left top;
+}
+
+/* Input Floating Interaction Rules */
+.input-wrapper.focus .floating-label,
+.input-wrapper.filled .floating-label {
+    transform: translateY(-90%) scale(0.78);
+    color: var(--text-placeholder);
+}
+
+/* Toggle Password visibility button */
+.toggle-password-btn {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 4px;
+    display: none; /* Shown dynamically via JS when value length > 0 */
+}
+
+/* Buttons */
+.submit-btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 24px;
+    background-color: var(--btn-disabled);
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    pointer-events: none;
+}
+
+.submit-btn.active {
+    background-color: var(--btn-active);
+    color: var(--text-primary);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.submit-btn.active:hover {
+    background-color: var(--btn-active-hover);
+}
+
+.submit-btn.active:active {
+    transform: scale(0.98);
+}
+
+/* Loader style */
+.btn-loader {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: rotateLoader 0.6s linear infinite;
+    display: none;
+}
+
+.submit-btn.loading .btn-text {
+    display: none;
+}
+
+.submit-btn.loading .btn-loader {
+    display: inline-block;
+}
+
+/* Forgot link */
+.forgot-link {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    margin: 12px 0 16px 0;
+    opacity: 0.85;
+}
+
+.forgot-link:hover {
+    opacity: 1;
+}
+
+/* Social Login buttons & Outline buttons */
+.facebook-login-btn,
+.create-account-btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 24px;
+    border: 1px solid var(--btn-outline-border);
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.facebook-login-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-hover);
+}
+
+.facebook-login-btn:active,
+.create-account-btn:active {
+    transform: scale(0.98);
+}
+
+.create-account-btn {
+    border-color: var(--btn-outline-blue);
+}
+
+.create-account-btn:hover {
+    background-color: rgba(0, 149, 246, 0.08);
+}
+
+.fb-icon {
+    color: #1877f2;
+}
+
+/* Meta Brand Mark */
+.meta-brand-mark {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    color: var(--text-secondary);
+}
+
+/* 6. Footer Styles */
+.page-footer {
+    padding: 38px 16px 52px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #000;
+    z-index: 10;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 16px;
+    max-width: 1000px;
+}
+
+.footer-links a {
+    font-size: 12px;
+    color: var(--text-secondary);
+    transition: opacity var(--transition-fast);
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-placeholder);
+}
+
+.language-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.language-selector select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    color: var(--text-placeholder);
+    font-size: 12px;
+    padding-right: 16px;
+    cursor: pointer;
+    outline: none;
+    font-family: inherit;
+}
+
+.language-selector select:hover {
+    color: var(--text-secondary);
+}
+
+.language-selector .chevron-down {
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+    color: var(--text-placeholder);
+}
+
+/* 7. Simulation Modals */
+.simulation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+}
+
+.simulation-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: var(--modal-bg);
+    border: 1px solid var(--modal-border);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    padding: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform var(--transition-normal);
+    color: var(--text-primary);
+}
+
+.simulation-modal.open .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.modal-x-btn {
+    color: var(--text-secondary);
+    font-size: 24px;
+    line-height: 1;
+    transition: color var(--transition-fast);
+}
+
+.modal-x-btn:hover {
+    color: var(--text-primary);
+}
+
+.modal-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.modal-input-wrapper {
+    margin-bottom: 16px;
+}
+
+.modal-submit-btn {
+    width: 100%;
+    height: 44px;
+    border-radius: 22px;
+    background-color: var(--focus-outline);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-fast);
+}
+
+.modal-submit-btn:hover {
+    background-color: var(--btn-active-hover);
+}
+
+/* Success modal custom modifications */
+.text-center {
+    text-align: center;
+}
+
+.modal-icon-success {
+    color: #00f157;
+    margin-bottom: 16px;
+    display: inline-flex;
+    animation: scaleCheck 0.5s ease-out;
+}
+
+.modal-content h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.modal-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.user-details-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--modal-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.user-avatar-initial {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.user-details-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details-text strong {
+    font-size: 14px;
+}
+
+.user-details-text span {
+    font-size: 12px;
+    color: var(--close-friends-green);
+}
+
+.modal-close-btn {
+    width: 100%;
+    height: 44px;
+    border-radius: 22px;
+    background-color: #262626;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+    background-color: #363636;
+}
+
+/* Facebook connection modal */
+.fb-themed-modal {
+    border-color: #1877f2;
+}
+
+.fb-modal-logo {
+    color: #1877f2;
+}
+
+.fb-action-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fb-btn-primary {
+    background-color: #1877f2;
+    color: #fff;
+}
+
+.fb-btn-primary:hover {
+    background-color: #166fe5;
+}
+
+.btn-flat {
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+.btn-flat:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+/* 8. Keyframe Animations */
+@keyframes floatLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@keyframes floatSticker {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-3px) rotate(1deg); }
+}
+
+@keyframes pulseBadge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+@keyframes rotateLoader {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes scaleCheck {
+    0% { transform: scale(0.6); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* 9. Responsive Design Media Queries */
+@media (max-width: 950px) {
+    .left-panel {
+        padding-right: 30px;
+    }
+    .main-content::before {
+        margin: 40px 30px 40px 0;
+    }
+}
+
+@media (max-width: 875px) {
+    /* Hide the left side decoration entirely, center form */
+    .left-panel {
+        display: none;
+    }
+    .main-content::before {
+        display: none;
+    }
+    .right-panel {
+        flex: 1;
+        max-width: 400px;
+        padding: 0;
+    }
+    .main-content {
+        padding: 40px 24px;
+    }
+    body {
+        background-color: #000;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 24px 16px;
+    }
+    .login-title {
+        font-size: 1.15rem;
+    }
+    .input-wrapper {
+        height: 56px;
+    }
+}
